@@ -41,6 +41,7 @@
 
     // Prefill desde el estado del bloque
     sdk.getData((data = {}) => {
+      console.log("DATA RECUPERADA:", data);
       const { sku1 = '', sku2 = '', sku3 = '' , sku4 = '',sku5 = '',sku6 = ''} = data;
       document.getElementById('sku1').value = sku1;
       document.getElementById('sku2').value = sku2;
@@ -48,7 +49,7 @@
       document.getElementById('sku4').value = sku4;
       document.getElementById('sku5').value = sku5;
       document.getElementById('sku6').value = sku6;
-      updateContent();
+      //updateContent();
     });
 
     // Actualiza estado + contenido al tipear
@@ -70,6 +71,8 @@
       const sku6 = document.getElementById('sku6').value.trim();
 
       const data = { sku1, sku2, sku3, sku4, sku5, sku6 };
+      console.log("DATA GUARDADA:", data);
+      
       sdk.setData(data, () => {
         // Snippet AMPscript que el bloque insertará en el email
         const ampscript = `
