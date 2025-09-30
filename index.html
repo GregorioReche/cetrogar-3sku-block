@@ -81,6 +81,30 @@
   SET @sku4 = "${esc(sku4)}"
   SET @sku5 = "${esc(sku5)}"
   SET @sku6 = "${esc(sku6)}"
+
+  SET @catalogDE = "Catalogo"
+
+  SET @rows1 = LookupRows(@catalogDE, "ProductCode", @sku1)
+  SET @rows2 = LookupRows(@catalogDE, "ProductCode", @sku2)
+  SET @rows3 = LookupRows(@catalogDE, "ProductCode", @sku3)
+  SET @rows4 = LookupRows(@catalogDE, "ProductCode", @sku4)
+  SET @rows5 = LookupRows(@catalogDE, "ProductCode", @sku5)
+  SET @rows6 = LookupRows(@catalogDE, "ProductCode", @sku6)
+
+  SET @row1 = Row(@rows1, 1)
+  SET @row2 = Row(@rows2, 1)
+  SET @row3 = Row(@rows3, 1)
+  SET @row4 = Row(@rows4, 1)
+  SET @row5 = Row(@rows5, 1)
+  SET @row6 = Row(@rows6, 1)
+
+  SET @name1 = Field(@row1, "ProductName")
+  SET @img1  = Field(@row1, "Imagen")
+  SET @price1= Field(@row1, "RegularPrice")
+  SET @sale1 = Field(@row1, "SalePrice")
+  SET @url1  = Field(@row1, "ProductLink")
+
+  /* repetir igual para name2..url6 */
 ]%%
 `.trim();
 
