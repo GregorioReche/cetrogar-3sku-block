@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cetrogar 3 SKU Block</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:16px; }
+    label { display:block; margin-top:8px; font-weight:600; }
+    input { width:100%; padding:8px; margin-top:4px; box-sizing:border-box; }
+    .hint { font-size:12px; opacity:.7; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <h3>Cetrogar · 3 SKU</h3>
+
+  <label>SKU 1</label>
+  <input id="sku1" placeholder="Ej: 12345" />
+
+  <label>SKU 2</label>
+  <input id="sku2" placeholder="Ej: 67890" />
+
+  <label>SKU 3</label>
+  <input id="sku3" placeholder="Ej: ABCDE" />
+
+  <p class="hint">El bloque guarda estado y genera AMPscript para tu email.</p>
+
+  <!-- Incluí el blocksdk local (descargado del repo) -->
+  <script src="./blocksdk.js"></script>
+  <script>
+    const sdk = new window.sfdc.BlockSDK();
+
+    // Prefill desde el estado del bloque
+    sdk.getData((data = {}) => {
+      const { sku1 = '', sku2 = '', sku3 = '' } = data;
+      document.getElementById('sku1').value = sku1;
+      document.getElementById('sku2').value = sku2;
+      document.getElementById('sku3').value = sku3;
+      updateContent();
+    });
+
+    // Actualiza estado + contenido al tipear
+    ['sku1','sku2','sku3'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateContent);
+    });
+
+    function esc(str) {
+      // escapamos comillas para AMPscript
+      return String(str || '').replace(/"/g, '\\"');
+    }
+
+    function updateContent() {
+      const sku1 = document.getElementById('sku1').value.trim();
+      const sku2 = document.getElementById('sku2').value.trim();
+      const sku3 = document.getElementById('sku3').value.trim();
+
+      const data = { sku1, sku2, sku3 };
+      sdk.setData(data, () => {
+        // Snippet AMPscript que el bloque insertará en el email
+        const ampscript = `
+%%[
+  VAR @sku1, @sku2, @sku3
+  SET @sku1 = "${esc(sku1)}"
+  SET @sku2 = "${esc(sku2)}"
+  SET @sku3 = "${esc(sku3)}"
+]%%
+`.trim();
+
+        // Contenido “real” que se guarda en el asset
+        sdk.setContent(ampscript);
+
+        // SuperContent solo para el preview en el editor (no se publica)
+        const preview = `
+<div style="font:14px/1.4 system-ui;">
+  <strong>SKUs seleccionados</strong><br>
+  1) ${sku1 || '<em>vacío</em>'}<br>
+  2) ${sku2 || '<em>vacío</em>'}<br>
+  3) ${sku3 || '<em>vacío</em>'}
+</div>`;
+        sdk.setSuperContent(preview);
+      });
+    }
+  </script>
+</body>
+</html>
