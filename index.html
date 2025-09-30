@@ -35,7 +35,7 @@
   <p class="hint">El bloque guarda estado y genera AMPscript para tu email.</p>
 
   <!-- Incluí el blocksdk local (descargado del repo) -->
-  <script src="./blocksdk.js"></script>
+  <script src="https://unpkg.com/blocksdk/blocksdk.js"></script>
   <script>
     const sdk = new window.sfdc.BlockSDK();
 
@@ -72,7 +72,7 @@
 
       const data = { sku1, sku2, sku3, sku4, sku5, sku6 };
       console.log("DATA GUARDADA:", data);
-      
+
       sdk.setData(data, () => {
         // Snippet AMPscript que el bloque insertará en el email
         const ampscript = `
