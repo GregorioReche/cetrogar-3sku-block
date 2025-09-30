@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-  <h3>Cetrogar · 3 SKU</h3>
+  <h3>Cetrogar · 6 SKU</h3>
 
   <label>SKU 1</label>
   <input id="sku1" placeholder="Ej: 12345" />
@@ -23,6 +23,15 @@
   <label>SKU 3</label>
   <input id="sku3" placeholder="Ej: ABCDE" />
 
+  <label>SKU 4</label>
+  <input id="sku4" placeholder="Ej: FGHIJ" />
+
+  <label>SKU 5</label>
+  <input id="sku5" placeholder="Ej: KLMNO" />
+
+  <label>SKU 6</label>
+  <input id="sku6" placeholder="Ej: PQRST" />
+
   <p class="hint">El bloque guarda estado y genera AMPscript para tu email.</p>
 
   <!-- Incluí el blocksdk local (descargado del repo) -->
@@ -32,15 +41,18 @@
 
     // Prefill desde el estado del bloque
     sdk.getData((data = {}) => {
-      const { sku1 = '', sku2 = '', sku3 = '' } = data;
+      const { sku1 = '', sku2 = '', sku3 = '' , sku4 = '',sku5 = '',sku6 = ''} = data;
       document.getElementById('sku1').value = sku1;
       document.getElementById('sku2').value = sku2;
       document.getElementById('sku3').value = sku3;
+      document.getElementById('sku4').value = sku4;
+      document.getElementById('sku6').value = sku5;
+      document.getElementById('sku6').value = sku6;
       updateContent();
     });
 
     // Actualiza estado + contenido al tipear
-    ['sku1','sku2','sku3'].forEach(id => {
+    ['sku1','sku2','sku3','sku4','sku5','sku6'].forEach(id => {
       document.getElementById(id).addEventListener('input', updateContent);
     });
 
@@ -53,16 +65,22 @@
       const sku1 = document.getElementById('sku1').value.trim();
       const sku2 = document.getElementById('sku2').value.trim();
       const sku3 = document.getElementById('sku3').value.trim();
+      const sku4 = document.getElementById('sku4').value.trim();
+      const sku5 = document.getElementById('sku5').value.trim();
+      const sku6 = document.getElementById('sku6').value.trim();
 
-      const data = { sku1, sku2, sku3 };
+      const data = { sku1, sku2, sku3, sku4, sku5, sku6 };
       sdk.setData(data, () => {
         // Snippet AMPscript que el bloque insertará en el email
         const ampscript = `
 %%[
-  VAR @sku1, @sku2, @sku3
+  VAR @sku1, @sku2, @sku3, @sku4, @sku5, @sku6
   SET @sku1 = "${esc(sku1)}"
   SET @sku2 = "${esc(sku2)}"
   SET @sku3 = "${esc(sku3)}"
+  SET @sku4 = "${esc(sku4)}"
+  SET @sku5 = "${esc(sku5)}"
+  SET @sku6 = "${esc(sku6)}"
 ]%%
 `.trim();
 
@@ -75,7 +93,10 @@
   <strong>SKUs seleccionados</strong><br>
   1) ${sku1 || '<em>vacío</em>'}<br>
   2) ${sku2 || '<em>vacío</em>'}<br>
-  3) ${sku3 || '<em>vacío</em>'}
+  3) ${sku3 || '<em>vacío</em>'}<br>
+  4) ${sku4 || '<em>vacío</em>'}<br>
+  5) ${sku5 || '<em>vacío</em>'}<br>
+  6) ${sku6 || '<em>vacío</em>'}
 </div>`;
         sdk.setSuperContent(preview);
       });
