@@ -144,14 +144,8 @@
 
         // SuperContent solo para el preview en el editor (no se publica)
         const preview = `
-<div style="font:14px/1.4 system-ui;">
-  <strong>SKUs seleccionados</strong><br>
-  1) ${sku1 || '<em>vacío</em>'}<br>
-  2) ${sku2 || '<em>vacío</em>'}<br>
-  3) ${sku3 || '<em>vacío</em>'}<br>
-  4) ${sku4 || '<em>vacío</em>'}<br>
-  5) ${sku5 || '<em>vacío</em>'}<br>
-  6) ${sku6 || '<em>vacío</em>'}
+<div style="font:14px/1.4 system-ui; color:#555;">
+  Seleccione aquí los SKUs de los productos.
 </div>`;
         sdk.setSuperContent(preview);
       });
