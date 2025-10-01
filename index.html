@@ -94,48 +94,59 @@
   SET @rows5 = LookupRows(@catalogDE, "ProductCode", @sku5)
   SET @rows6 = LookupRows(@catalogDE, "ProductCode", @sku6)
 
+  IF RowCount(@rows1) > 0 THEN
   SET @row1 = Row(@rows1, 1)
-  SET @row2 = Row(@rows2, 1)
-  SET @row3 = Row(@rows3, 1)
-  SET @row4 = Row(@rows4, 1)
-  SET @row5 = Row(@rows5, 1)
-  SET @row6 = Row(@rows6, 1)
-
   SET @name1 = Field(@row1, "ProductName")
   SET @img1  = Field(@row1, "Imagen")
   SET @price1= Field(@row1, "RegularPrice")
   SET @sale1 = Field(@row1, "SalePrice")
   SET @url1  = Field(@row1, "ProductLink")
+  ENDIF
+  
+  IF RowCount(@rows2) > 0 THEN
+    SET @row2 = Row(@rows2, 1)
+    SET @name2 = Field(@row2, "ProductName")
+    SET @img2 = Field(@row2, "Imagen")
+    SET @price2 = Field(@row2, "RegularPrice")
+    SET @sale2 = Field(@row2, "SalePrice")
+    SET @url2 = Field(@row2, "ProductLink")
+  ENDIF
 
-  SET @name2 = Field(@row2, "ProductName")
-  SET @img2 = Field(@row2, "Imagen")
-  SET @price2 = Field(@row2, "RegularPrice")
-  SET @sale2 = Field(@row2, "SalePrice")
-  SET @url2 = Field(@row2, "ProductLink")
+  IF RowCount(@rows3) > 0 THEN
+    SET @row3 = Row(@rows3, 1)
+    SET @name3 = Field(@row3, "ProductName")
+    SET @img3 = Field(@row3, "Imagen")
+    SET @price3 = Field(@row3, "RegularPrice")
+    SET @sale3 = Field(@row3, "SalePrice")
+    SET @url3 = Field(@row3, "ProductLink")
+  ENDIF
 
-  SET @name3 = Field(@row3, "ProductName")
-  SET @img3 = Field(@row3, "Imagen")
-  SET @price3 = Field(@row3, "RegularPrice")
-  SET @sale3 = Field(@row3, "SalePrice")
-  SET @url3 = Field(@row3, "ProductLink")
+  IF RowCount(@rows4) > 0 THEN
+    SET @row4 = Row(@rows4, 1)
+    SET @name4 = Field(@row4, "ProductName")
+    SET @img4 = Field(@row4, "Imagen")
+    SET @price4 = Field(@row4, "RegularPrice")
+    SET @sale4 = Field(@row4, "SalePrice")
+    SET @url4 = Field(@row4, "ProductLink")
+  ENDIF
 
-  SET @name4 = Field(@row4, "ProductName")
-  SET @img4 = Field(@row4, "Imagen")
-  SET @price4 = Field(@row4, "RegularPrice")
-  SET @sale4 = Field(@row4, "SalePrice")
-  SET @url4 = Field(@row4, "ProductLink")
+  IF RowCount(@rows5) > 0 THEN
+    SET @row5 = Row(@rows5, 1)
+    SET @name5 = Field(@row5, "ProductName")
+    SET @img5 = Field(@row5, "Imagen")
+    SET @price5 = Field(@row5, "RegularPrice")
+    SET @sale5 = Field(@row5, "SalePrice")
+    SET @url5 = Field(@row5, "ProductLink")
+  ENDIF
 
-  SET @name5 = Field(@row5, "ProductName")
-  SET @img5 = Field(@row5, "Imagen")
-  SET @price5 = Field(@row5, "RegularPrice")
-  SET @sale5 = Field(@row5, "SalePrice")
-  SET @url5 = Field(@row5, "ProductLink")
-
-  SET @name6 = Field(@row6, "ProductName")
-  SET @img6 = Field(@row6, "Imagen")
-  SET @price6 = Field(@row6, "RegularPrice")
-  SET @sale6 = Field(@row6, "SalePrice")
-  SET @url6 = Field(@row6, "ProductLink")
+  IF RowCount(@rows6) > 0 THEN
+    SET @row6 = Row(@rows6, 1)
+    SET @name6 = Field(@row6, "ProductName")
+    SET @img6 = Field(@row6, "Imagen")
+    SET @price6 = Field(@row6, "RegularPrice")
+    SET @sale6 = Field(@row6, "SalePrice")
+    SET @url6 = Field(@row6, "ProductLink")
+  ENDIF
 ]%%
 `.trim();
 
